@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix - Seleção de Perfil</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Quem está assistindo?</h1>
+        <button id="theme-toggle" aria-label="Ativar modo claro" title="Alternar modo claro/escuro" type="button">
+            <span id="theme-icon" aria-hidden="true">👁️</span>
+            <span id="theme-label">Modo escuro</span>
+        </button>
+    </header>
+    <main>
+        <section class="profiles" aria-label="Seleção de Perfis">
+            <article class="profile">
+                <a href ="/catalogo/catalogo.html" target="_blank">
+                    <figure>
+                        <img src="/assets/Logo 1 henrique.jpg" alt=" O personagem veste o icônico macacão vermelho e a máscara de Salvador Dalí inclinada na cabeça">
+                        <figcaption>Henrique</figcaption>
+                    </figure>
+                </a>
+            </article>
+            <article class="profile">
+                <a href="/catalogo/catalogo.html" target="_blank">
+                    <figure>
+                        <img src="/assets/Logo 2 gabriel.jpg" alt="O personagem utiliza uma camisa social verde-oliva com um cinto de ferramentas tático e possui lâminas de sangue ao fundo">
+                        <figcaption>Gabriel</figcaption>
+                    </figure>
+                </a>
+            </article>
+             <article class="profile">
+                <a href="/catalogo/catalogo.html" target="_blank">
+                    <figure>
+                        <img src="/assets/Logo 3.jpg" alt="mostra um casal sorridente composto por um homem careca com barba e uma mulher loira, abraçados">
+                        <figcaption>Flávia e Murilo</figcaption>
+                    </figure>
+                </a>
+            </article>
+        </section>
+    </main>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const themeLabel = document.getElementById('theme-label');
+
+        const setTheme = (mode) => {
+            document.body.classList.toggle('light-mode', mode === 'light');
+            document.body.classList.toggle('dark-mode', mode === 'dark');
+
+            if (mode === 'light') {
+                themeIcon.textContent = '🙈';
+                themeLabel.textContent = 'Modo claro';
+                themeToggle.setAttribute('aria-label', 'Ativar modo escuro');
+                themeToggle.title = 'Ativar modo escuro';
+            } else {
+                themeIcon.textContent = '👁️';
+                themeLabel.textContent = 'Modo escuro';
+                themeToggle.setAttribute('aria-label', 'Ativar modo claro');
+                themeToggle.title = 'Ativar modo claro';
+            }
+
+            localStorage.setItem('theme-preference', mode);
+        };
+
+        const preferredTheme = localStorage.getItem('theme-preference') || 'dark';
+        setTheme(preferredTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+            setTheme(nextTheme);
+        });
+    </script>
+    <script src="js/index.js"></script>
+</body>
+</html>
